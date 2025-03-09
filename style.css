@@ -1,6 +1,8 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .navbar {
@@ -211,6 +213,115 @@ hr {
     font-size: 20px;
 }
 .social-icons>a :hover{
-    transform: scale(1.2);
-    
+    transform: scale(1.2); 
 }
+
+/* login page css code------------->>>>> */
+.heading{
+    width: 100%;
+}
+.heading .quiz-tittle{
+    position: relative;
+    top: 18px;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+.toggle{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.toggle .toggle {
+    position: absolute;
+    font-size: 30px;
+    padding: 10px;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+.signin-container{
+    position: relative;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* min-height: 100vh; */
+}
+.signin-content{
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow:  0 4px 8px rgba(0, 0, 0, 0.44);
+}
+.input-group{
+    margin: 12px 0px;
+}    
+.input-group input{
+    width: 90%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 12px 10px;
+    font-size: 15px;
+}
+input:focus{
+    font-weight: bold;
+    border: none;
+}
+.forgot{
+    margin: 12px 0px;
+}
+.forgot a{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    color: rgb(56, 56, 56);
+}
+.forgot a:hover{
+    color: blue;
+    text-decoration: underline;
+}
+.buttons{
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 0px 10px; */
+    /* flex-direction: column; */
+    gap: 12px;
+    /* margin: 12px 0px; */
+}
+.buttons button{
+    width: 95%;
+    padding: 8px 10px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 17px;
+    border: 1px solid black;
+}
+button:hover{
+    background-color: #e21b70;
+    color: white;
+    border: 1px solid #e21b70;
+}
+
+.link-page{
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.link-page a {
+    text-decoration: none;
+    font-weight: 600;
+    color: black;
+}
+
+.link-page a:hover{
+    color: blue;
+    text-decoration: underline;
+} 
