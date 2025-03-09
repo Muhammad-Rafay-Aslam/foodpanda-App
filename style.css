@@ -1,22 +1,25 @@
-body{
+body {
     margin: 0;
     padding: 0;
 }
-.navbar{
+
+.navbar {
     width: 100vw;
     height: 65px;
     background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.22) 0px 10px 50px;
 }
-.nav-contant{
+
+.nav-contant {
     width: 95vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: auto;
 }
-.nav-logo{
-    width: 180px;   
+
+.nav-logo {
+    width: 180px;
     height: 65px;
     background-image: url('./assets/images/logo-png-foodpanda-app-icon-horizontal-wordmark_300x300.avif');
     background-repeat: no-repeat;
@@ -24,16 +27,19 @@ body{
     background-position-x: center;
     background-position-y: center;
 }
-.nav-right-contant{
+
+.nav-right-contant {
     display: flex;
     align-items: center;
     gap: 22px;
 }
-a{
+
+a {
     text-decoration: none;
     color: black;
 }
-.button{
+
+.button {
     width: 85px;
     height: 33px;
     margin-right: 12px;
@@ -42,36 +48,45 @@ a{
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
-    transition: transform .2s;  
+    transition: transform .2s;
 }
-.button:hover{
+
+.button:hover {
     transform: scale(1.1)
 }
-.login-btn{
+
+.login-btn {
     background-color: #ffffff;
 }
-.signin-btn{
+
+.signin-btn {
     background-color: #e21b70;
     border: 1px solid #e21b70;
 }
-.signin-btn > a{
+
+.signin-btn>a {
     color: white;
 }
-.language-sectoin{
+
+.language-sectoin {
     margin-right: 5px;
 }
-.language-sectoin > span{
+
+.language-sectoin>span {
     font-weight: 600;
 }
-.language-icon{
+
+.language-icon {
     font-size: large;
     font-weight: 600;
     margin-right: 5px;
 }
-.cart-icon{
+
+.cart-icon {
     font-size: larger;
 }
-.hero-section{
+
+.hero-section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,11 +94,13 @@ a{
     height: 600px;
     box-shadow: rgba(0, 0, 0, 0.28) 0px -50px 36px -28px inset;
 }
-.left-section{
+
+.left-section {
     width: 50vw;
     height: 600px;
 }
-.left-section-contant{
+
+.left-section-contant {
     width: 48vw;
     height: 300px;
     padding: 12px;
@@ -91,21 +108,25 @@ a{
     align-items: center;
     margin-top: 150px;
 }
-.left-section-contant > .hero-heading{
+
+.left-section-contant>.hero-heading {
     font-size: 2.5rem;
     font-weight: 600;
     font-family: Arial, Helvetica, sans-serif;
 }
-.hero-btn{
+
+.hero-btn {
     width: 110px;
     height: 44px;
     font-size: 17px;
 }
-.right-section{
+
+.right-section {
     width: 55vw;
     height: 600px;
 }
-.bannar-panda{
+
+.bannar-panda {
     background-image: url('./assets/images/refresh-hero-city-pk.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -113,5 +134,83 @@ a{
     background-position-y: center;
     width: 50vw;
     height: 600px;
+}
 
+.second-heading {
+    margin: 22px 12px;
+    padding: 10px;
+    margin-bottom: 0;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.second-bannar {
+    background-image: url('./assets/images/second-bannar-image.jpg');
+    width: 100vw;
+    height: 50vh;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+
+.admin-sectoin {
+    text-align: center;
+    margin: 38px 20px;
+    padding: 20px;
+    font-size: larger;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+    width: 100vw;
+    max-height: max-content;
+    padding: 10px 7px;
+}
+
+.footer-contant {
+    width: 90vw;
+    margin: auto;
+}
+
+.footer-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    font-weight: 600;
+}
+
+.footer-para {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+hr {
+    width: 90vw;
+}
+
+.last-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-icons>a {
+    font-size: larger;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 38px;
+    border: 1px solid gray;
+    width: 55px;
+    transition: transform .2s;
+}
+
+.social-icons>a>i {
+    padding: 4px;
+    font-size: 20px;
+}
+.social-icons>a :hover{
+    transform: scale(1.2);
+    
 }
