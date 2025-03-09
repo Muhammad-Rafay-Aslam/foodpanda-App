@@ -294,7 +294,7 @@ input:focus{
     gap: 12px;
     /* margin: 12px 0px; */
 }
-.buttons button{
+.buttons .btn{
     width: 95%;
     padding: 8px 10px;
     border-radius: 20px;
@@ -304,7 +304,7 @@ input:focus{
     font-size: 17px;
     border: 1px solid black;
 }
-button:hover{
+.btn:hover{
     background-color: #e21b70;
     color: white;
     border: 1px solid #e21b70;
