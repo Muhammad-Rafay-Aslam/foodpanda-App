@@ -269,7 +269,7 @@ hr {
     font-size: 15px;
 }
 input:focus{
-    font-weight: bold;
+    /* font-weight: bold; */
     border: none;
 }
 .forgot{

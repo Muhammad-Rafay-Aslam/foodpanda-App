@@ -23,7 +23,12 @@ if(getsignUpBtn){
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user, 'sign in successfully')
+                Swal.fire({
+                    title: "Sign up Successfully!",
+                    text: `congrats ${user.email}`,
+                    icon: "success"
+                  });
+                  console.log(user.email)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -39,10 +44,15 @@ if(getLoginBtn){
     getLoginBtn.addEventListener('click', () => {
         let email = document.getElementById('lemail')
         let password = document.getElementById('lpassword')
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user, 'login successfully')
+        Swal.fire({
+            title: "Login Successfully!",
+            text: `congrats ${user.email}`,
+            icon: "success"
+          });
+        console.log(user.email)
       })
       .catch((error) => {
         const errorCode = error.code;
