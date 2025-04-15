@@ -89,6 +89,10 @@ a {
     font-size: larger;
 }
 
+.fa-heart,.fa-user{
+    font-size: larger   ;
+}
+
 .hero-section {
     display: flex;
     justify-content: center;

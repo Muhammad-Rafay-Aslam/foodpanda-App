@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Admin-SignUp-to-Foodpanda</title>
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-content">
+            <h1 id="well" class="welcome">Sign Up</h1>
+            <div>
+                <div class="input-group">
+                    <input type="text" placeholder="Name" name="" id="sname" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" placeholder="Email" name="" id="semail" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Password" name="" id="spassword" required>
+                </div>
+                <div class="forgot">
+                    <a href="#" class="forgot-passward">Forgot Password?</a>
+                </div>
+                <div class="buttons">
+                    <button id="s-Btn" class="sign-btn btn" type="submit">Sign In</button>
+                </div>
+                <div class="link-page">
+                    <span id="link">I have an account : </span><a  href="./adminLogin.html">Go to login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
