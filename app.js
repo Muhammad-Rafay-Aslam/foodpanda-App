@@ -19,6 +19,9 @@ onAuthStateChanged(auth, (user) => {
     if (location.pathname.endsWith('userSignup.html') || location.pathname.endsWith('userLogin.html')) {
       location.href = './userDashboard.html'
     }
+    if(location.pathname.endsWith('adminLogin.html') || location.pathname.endsWith('adminSignup.html')){
+      location.href = './adminDashboard.html'
+    }
     const uid = user.uid;
     console.log(uid.email)
   } else {
