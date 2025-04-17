@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXUWaGH4tCeFTV8nr6kecC17MDXVXAcF8",
@@ -19,7 +19,7 @@ onAuthStateChanged(auth, (user) => {
     if (location.pathname.endsWith('userSignup.html') || location.pathname.endsWith('userLogin.html')) {
       location.href = './userDashboard.html'
     }
-    if(location.pathname.endsWith('adminLogin.html') || location.pathname.endsWith('adminSignup.html')){
+    if (location.pathname.endsWith('adminLogin.html') || location.pathname.endsWith('adminSignup.html')) {
       location.href = './adminDashboard.html'
     }
     const uid = user.uid;
@@ -81,3 +81,61 @@ if (getLoginBtn) {
       });
   })
 }
+
+let getadminLogoutBtn = document.getElementById('logout')
+getadminLogoutBtn.addEventListener('click', () => {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to log out?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "You LogOut",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          window.location.href = './index.html'
+        }
+      });
+    }).catch((error) => {
+      console.log(error)
+    });
+})
+
+let getuserLogoutBtn = document.getElementById('logout')
+getuserLogoutBtn.addEventListener('click', () => {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to log out?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "You LogOut",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          window.location.href = './index.html'
+        }
+      });
+    }).catch((error) => {
+      console.log(error)
+    });
+})
+
+let span = document.getElementById('user-email')
