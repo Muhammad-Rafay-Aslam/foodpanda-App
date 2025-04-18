@@ -20,7 +20,7 @@
             <div class="nav-right">
                 <div class="nav-right-contant">
                     <div class="u-profile">
-                        <a href="#"><i class="fa-regular fa-user"></i></a>
+                        <a href="#"><i class="fa-regular fa-user text-dark"></i></a>
                         <span id="user-email"></span>
                     </div>
                     <div class="language-sectoin">
@@ -28,7 +28,7 @@
                         <span>EN</span>
                     </div>
                     <div class="signup-login-btns">
-                        <button id="logout" class="signin-btn button nav-btn-res signin-btn-color" type="button"><a href="#">Log
+                        <button id="logout" class="signin-btn button nav-btn-res signin-btn-color " type="button"><a href="#" class="text-decoration-none">Log
                                 Out</a></button>
                     </div>
                 </div>
@@ -50,32 +50,32 @@
                     <form>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="name">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Price:</label>
-                            <input type="number" class="form-control" id="recipient-name">
+                            <input type="number" class="form-control" id="price">
                         </div>
                         
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Discription:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <textarea class="form-control" id="dis"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Image URL:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="img-url">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Save</button>
+                    <button id="savedata" type="button" class="btn btn-success">Save</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="card-container">
-        <div class="cards" id="cards">
+        <div class="cards row container my-5" id="cards">
     
         </div>
     </div>
