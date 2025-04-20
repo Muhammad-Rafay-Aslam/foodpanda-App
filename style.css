@@ -330,7 +330,9 @@ input:focus{
     color: blue;
     text-decoration: underline;
 } 
-
+.card-body > .name{
+    color: #e21b70;
+}
 @media screen and (max-width: 786px) {
    .navbar{
     width: 100%;
@@ -338,6 +340,9 @@ input:focus{
    }
     .nav-btn-res{
     display: none;
+   }
+   .hero-section{
+    width: 100vw;
    }
 }
 

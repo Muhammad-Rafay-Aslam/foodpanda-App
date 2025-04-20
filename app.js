@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXUWaGH4tCeFTV8nr6kecC17MDXVXAcF8",
@@ -18,10 +18,10 @@ const db = getFirestore(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    if (location.pathname.endsWith('userSignup.html') || location.pathname.endsWith('userLogin.html')) {
+    if (location.pathname.endsWith('/userSignup.html') || location.pathname.endsWith('/userLogin.html')) {
       location.href = './userDashboard.html'
     }
-    if (location.pathname.endsWith('adminLogin.html') || location.pathname.endsWith('adminSignup.html')) {
+    if (location.pathname.endsWith('/adminLogin.html') || location.pathname.endsWith('/adminSignup.html')) {
       location.href = './adminDashboard.html'
     }
     const uid = user.uid;
@@ -68,7 +68,7 @@ if (getLoginBtn) {
           title: "Login Successfully!",
           text: `congrats ${user.email}`,
           icon: "success"
-        });
+        })
         console.log(user.email)
       })
       .catch((error) => {
@@ -103,8 +103,9 @@ getadminLogoutBtn.addEventListener('click', () => {
             title: "You LogOut",
             text: "Your file has been deleted.",
             icon: "success"
-          });
-          window.location.href = './index.html'
+          }).then(() => {
+            window.location.href = './index.html'
+          })
         }
       });
     }).catch((error) => {
@@ -128,11 +129,12 @@ getuserLogoutBtn.addEventListener('click', () => {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
-            title: "You LogOut",
-            text: "Your file has been deleted.",
+            title: "Logging out?",
+            text: "Thanks for stopping by. See you again soon!.",
             icon: "success"
-          });
-          window.location.href = './index.html'
+          }).then(() => {
+            window.location.href = './index.html'
+          })
         }
       });
     }).catch((error) => {
@@ -163,14 +165,14 @@ getsaveDataBtn.addEventListener('click', async () => {
       showCancelButton: true,
       confirmButtonText: "Save",
       denyButtonText: `Don't save`
-    }).then((result) => {
-      if (result.isConfirmed) {
+    }).then((addDoc) => {
+      if (addDoc.isConfirmed) {
         Swal.fire("Saved!", "", "success");
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
     });
-    readData()
+    addData()
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -178,24 +180,26 @@ getsaveDataBtn.addEventListener('click', async () => {
 
 })
 
-async function readData() {
+async function addData() {
   const querySnapshot = await getDocs(collection(db, "dishes"));
   querySnapshot.forEach((doc) => {
     getCards.innerHTML += ` <div class="card m-2 pt-2" style="width: 18rem;">
   <img src="${doc.data().image}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">${doc.data().name}</h5>
-    <h6 class="card-title">RS : ${doc.data().price}</h6>
+    <h5 class="card-title name">${doc.data().name}</h5>
     <p class="card-text">${doc.data().discription}</p>
-    <a href="#" class="btn btn-primary"    onclick="openEditModal('${doc.id}', '${doc.data().name}', '${doc.data().price}', '${doc.data().discription}', '${doc.data().image}')">Edit</a>
+    <h5 class="card-title">Price: ${doc.data().price}</h5>
+    <div class="continer text-center">
+      <a href="#" class="btn btn-primary " onclick="openEditModal('${doc.id}', '${doc.data().name}', '${doc.data().price}', '${doc.data().discription}', '${doc.data().image}')">Edit</a>
     <a href="#" class="btn btn-danger" onclick="delItem('${doc.id}')">Delete</a>
+    </div>
   </div>
   </div>`
     // console.log(`${doc.id} => ${doc.data()}`);
   });
 
 }
-readData()
+addData()
 
 async function delItem(id) {
   getCards.innerHTML = "";
@@ -203,11 +207,11 @@ async function delItem(id) {
   await deleteDoc(cityRef, {
     capital: deleteField(),
   });
-  readData();
+  addData();
 }
 window.delItem = delItem;
 let editingProductId = null;
-window.openEditModal = function ( name, price, discription, image) {
+window.openEditModal = function (name, price, discription, image) {
   editingProductId = id;
   document.getElementById("editProductName").value = name;
   document.getElementById("editProductPrice").value = price;
@@ -243,7 +247,7 @@ window.saveProductChanges = async function () {
     });
 
     getCards.innerHTML = "";
-    readData();
+    addData();
 
     bootstrap.Modal.getInstance(
       document.getElementById("editProductModal")
@@ -256,4 +260,3 @@ window.saveProductChanges = async function () {
     });
   }
 };
-  
