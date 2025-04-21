@@ -70,6 +70,8 @@ if (getLoginBtn) {
           icon: "success"
         })
         console.log(user.email)
+      }).then(() => {
+        location.href = './adminDashboard.html'
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -205,53 +207,50 @@ async function delItem(id) {
   getCards.innerHTML = "";
   const cityRef = doc(db, "dishes", id);
   await deleteDoc(cityRef, {
-    capital: deleteField(),
+    capital: deleteField();
   });
   addData();
 }
 window.delItem = delItem;
-let editingProductId = null;
-window.openEditModal = function (name, price, discription, image) {
-  editingProductId = id;
+
+window.openEditModal = function (id, name, price, discription, image) {
+  document.getElementById("editProductId").value = id;
   document.getElementById("editProductName").value = name;
   document.getElementById("editProductPrice").value = price;
   document.getElementById("editProductDesc").value = discription;
   document.getElementById("editProductImage").value = image;
 
-  let editModal = new bootstrap.Modal(
-    document.getElementById("editProductModal")
-  );
+  let editModal = new bootstrap.Modal(document.getElementById("editProductModal"));
   editModal.show();
 };
 
 window.saveProductChanges = async function () {
+  const id = document.getElementById("editProductId").value;
   const name = document.getElementById("editProductName").value;
   const price = document.getElementById("editProductPrice").value;
   const discription = document.getElementById("editProductDesc").value;
   const image = document.getElementById("editProductImage").value;
 
-  const productRef = doc(db, "dishes", editingProductId);
+  const productRef = doc(db, "dishes", id);
 
   try {
     await updateDoc(productRef, {
       name,
       price,
       discription,
-      image,
+      image
     });
 
     Swal.fire({
-      title: "Updated!",
-      text: "Product updated successfully.",
-      icon: "success",
+      title: "Update!",
+      text: "Product successfully updated",
+      icon: "success"
     });
 
     getCards.innerHTML = "";
     addData();
+    bootstrap.Modal.getInstance(document.getElementById("editProductModal")).hide();
 
-    bootstrap.Modal.getInstance(
-      document.getElementById("editProductModal")
-    ).hide();
   } catch (error) {
     Swal.fire({
       icon: "error",
