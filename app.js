@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, deleteField, setDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXUWaGH4tCeFTV8nr6kecC17MDXVXAcF8",
@@ -31,9 +31,9 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-let getsignUpBtn = document.getElementById('s-Btn')
-if (getsignUpBtn) {
-  getsignUpBtn.addEventListener('click', () => {
+let getusersignUpBtn = document.getElementById('us-Btn')
+if (getusersignUpBtn) {
+  getusersignUpBtn.addEventListener('click', () => {
     let email = document.getElementById('semail')
     let password = document.getElementById('spassword')
     let UserName = document.getElementById('sname')
@@ -46,6 +46,8 @@ if (getsignUpBtn) {
           icon: "success"
         });
         console.log(user.email)
+      }).then(() => {
+        location.href = './userLogin.html'
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -56,9 +58,65 @@ if (getsignUpBtn) {
   })
 }
 
-let getLoginBtn = document.getElementById('l-Btn')
-if (getLoginBtn) {
-  getLoginBtn.addEventListener('click', () => {
+let getuserLoginBtn = document.getElementById('ul-Btn')
+if (getuserLoginBtn) {
+  getuserLoginBtn.addEventListener('click', () => {
+    let email = document.getElementById('lemail')
+    let password = document.getElementById('lpassword')
+    signInWithEmailAndPassword(auth, email.value, password.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        Swal.fire({
+          title: "Login Successfully!",
+          text: `congrats ${user.email}`,
+          icon: "success"
+        })
+        console.log(user.email)
+      }).then(() => {
+        location.href = './userDashboard.html'
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Invalid Credential",
+        });
+        console.log(errorCode, errorMessage)
+      });
+  })
+}
+let getadminsignUpBtn = document.getElementById('as-Btn')
+if (getadminsignUpBtn) {
+  getadminsignUpBtn.addEventListener('click', () => {
+    let email = document.getElementById('semail')
+    let password = document.getElementById('spassword')
+    let UserName = document.getElementById('sname')
+    createUserWithEmailAndPassword(auth, email.value, password.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        Swal.fire({
+          title: "Sign up Successfully!",
+          text: `congrats ${user.email}`,
+          icon: "success"
+        });
+        console.log(user.email)
+      }).then(() => {
+        location.href = './adminlogin.html'
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+      });
+
+  })
+}
+
+let getadminLoginBtn = document.getElementById('al-Btn')
+if (getadminLoginBtn) {
+  getadminLoginBtn.addEventListener('click', () => {
     let email = document.getElementById('lemail')
     let password = document.getElementById('lpassword')
     signInWithEmailAndPassword(auth, email.value, password.value)
@@ -152,48 +210,51 @@ let getImgUrl = document.getElementById('img-url')
 let getCards = document.getElementById('cards')
 let getsaveDataBtn = document.getElementById('savedata')
 
-getsaveDataBtn.addEventListener('click', async () => {
-  getCards.innerHTML = ""
-  try {
-    const docRef = await addDoc(collection(db, "dishes"), {
-      name: getName.value,
-      price: getPrice.value,
-      discription: getdiscription.value,
-      image: getImgUrl.value
-    });
-    Swal.fire({
-      title: "Do you want to save the changes?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Save",
-      denyButtonText: `Don't save`
-    }).then((addDoc) => {
-      if (addDoc.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
-      }
-    });
-    addData()
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+if (getsaveDataBtn) {
 
-})
+  getsaveDataBtn.addEventListener('click', async () => {
+    getCards.innerHTML = ""
+    try {
+      const docRef = await addDoc(collection(db, "dishes"), {
+        name: getName.value,
+        price: getPrice.value,
+        discription: getdiscription.value,
+        image: getImgUrl.value
+      });
+      Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Saved!", "", "success");
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+      addData()
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+  })
+}
 
 async function addData() {
   const querySnapshot = await getDocs(collection(db, "dishes"));
   querySnapshot.forEach((doc) => {
-    getCards.innerHTML += ` <div class="card m-2 pt-2" style="width: 18rem;">
+    getCards.innerHTML += ` <div class="card m-2 pt-2" style="width: 22rem;">
   <img src="${doc.data().image}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title name">${doc.data().name}</h5>
     <p class="card-text">${doc.data().discription}</p>
     <h5 class="card-title">Price: ${doc.data().price}</h5>
     <div class="continer text-center">
-      <a href="#" class="btn btn-primary " onclick="openEditModal('${doc.id}', '${doc.data().name}', '${doc.data().price}', '${doc.data().discription}', '${doc.data().image}')">Edit</a>
-    <a href="#" class="btn btn-danger" onclick="delItem('${doc.id}')">Delete</a>
+      <a href="#" class="btn btn-primary px-5 " onclick="openEditModal('${doc.id}', '${doc.data().name}', '${doc.data().price}', '${doc.data().discription}', '${doc.data().image}')">Edit</a>
+    <a href="#" class="btn btn-danger px-5" onclick="delItem('${doc.id}')">Delete</a>
     </div>
   </div>
   </div>`
@@ -207,7 +268,7 @@ async function delItem(id) {
   getCards.innerHTML = "";
   const cityRef = doc(db, "dishes", id);
   await deleteDoc(cityRef, {
-    capital: deleteField();
+    capital: deleteField()
   });
   addData();
 }
@@ -258,4 +319,45 @@ window.saveProductChanges = async function () {
       text: error.message,
     });
   }
+};
+
+let userCards = document.getElementById('user-cards');
+
+async function readUserDishes() {
+  userCards.innerHTML = ""
+  const querySnapshot = await getDocs(collection(db, "dishes"));
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+
+    userCards.innerHTML += `
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="${data.image}" class="card-img-top" alt="${data.name}">
+          <div class="card-body">
+            <h5 class="card-title name">${data.name}</h5>
+            <p class="card-text">${data.discription}</p>
+            <h6>Price: Rs ${data.price}</h6>
+            <button class="btn btn-danger w-100 mt-2">Order Now</button>
+            <button type="button" class="btn btn-warning w-100 mt-2" onclick="addToCart('${doc.id}', '${data.name}', '${data.price}', '${data.discription}', '${data.image}')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+readUserDishes();
+
+window.addToCart = function(id, name, price, image, discription) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  cart.push({ id, name, price, image, discription });
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  Swal.fire({
+    icon: 'success',
+    title: 'Added to Cart',
+    text: `${name} ko cart me daal diya!`
+  });
 };

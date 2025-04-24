@@ -25,6 +25,7 @@
 }
 
 </style>
+
 <body>
     <div class="navbar">
         <div class="nav-contant ">
@@ -49,11 +50,49 @@
         </div>  
     </div>
     <div class="container my-5">
-        <div class="row" id="user-cards"></div>
+        <h2>Your Cart Items</h2>
+        <div class="row" id="cart-items"></div>
+        <button class="btn btn-danger mt-3" onclick="clearCart()">Clear Cart</button>
     </div>
-    
-    <script type="module" src="app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('cart-items');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Your cart is empty!</p>';
+                return;
+            }
+
+            cart.forEach(item => {
+                container.innerHTML += `
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="${item.image}" class="card-img-top" alt="${item.name}">
+              <div class="card-body">
+                <h5 class="card-title">${item.name}</h5>
+                <p class="card-text">${item.discription}</p>
+                <h6>Price: Rs ${item.price}</h6>
+                <button class="btn btn-danger" onclick="removeFromCart('${item.id}')">Remove</button>
+              </div>
+            </div>
+          </div>`;
+            });
+        });
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            location.reload();
+        }
+
+        function removeFromCart(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            location.reload();
+        }
+    </script>
 </body>
 
 </html>
